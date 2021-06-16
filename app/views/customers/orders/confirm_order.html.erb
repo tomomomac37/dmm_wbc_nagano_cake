@@ -1,0 +1,58 @@
+<h2>注文情報確認</h2>
+<div class="row">
+    <div class="col-md-7">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">商品名</th>
+            <th scope="col">単価（税込）</th>
+            <th scope="col">数量</th>
+            <th scope="col">小計</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <% @cart_items.each do |cart_item| %>
+          <tr>
+            <th scope="row"><%= attachment_image_tag(cart_item.item, :image,size: "300x217", fallback: "no_image.jpg") %><%= cart_item.item.name %></th>
+            <td><%= cart_item.item.price %></td>
+            <td><%= cart_item.amount %></td>
+            <td><%= cart_item.item.price * 1.1 * cart_item.amount.to_i %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+      <div class="col-md-5">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>送料</td>
+              <td><%= 800 %></td>
+            </tr>
+            <tr>
+              <td>商品合計</td>
+              <td><%= @sum %></td>
+            </tr>
+            <tr>
+              <td>請求合計</td>
+              <td><%= @sum + 800 %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+<h3>支払方法<%= @order.payment_method %></h3>
+<h3>お届け先<%= @order.address %></h3>
+<%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
+<!--create確認用-->
+<%= f.hidden_field :customer_id %>
+<%= f.hidden_field :postal_code %>
+<%= f.hidden_field :address %>
+<%= f.hidden_field :name %>
+<%= f.hidden_field :freight %>
+<%= f.hidden_field :billing_amount, :value => @sum+800 %>
+<%= f.hidden_field :payment_method %>
+<%= f.submit "注文を確定する", class:"btn btn-success col-md-3" %>
+<% end %>

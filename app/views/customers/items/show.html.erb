@@ -1,0 +1,23 @@
+<div class="row login-row">
+	<div class="col-xs-3">
+		<%= render 'genre', genres: @genres %>
+	</div>
+	<div class="col-xs-offset-1">
+		<div class="item-image">
+			<%= attachment_image_tag(@item, :image, fallback: "no_image.jpg",size: "300x217" ) %>
+		</div>
+	</div>
+	<div class="col-xs-5">
+		<div class="detail">
+			<h2><%= @item.name %></h2>
+			<p><%= @item.introduction %></p>
+			<h3 class="item-price">￥<%= (@item.price * 1.1).to_i %><span>（税込）</span></h3>
+			<%= form_with model: CartItem.new , url: cart_items_path, local: true do |f| %>
+		      <%= f.label :amount, "個数選択" %>
+		      <%= f.number_field :amount, min: 1, max: 100, placeholder: '個数選択', class:"amount-select-form" %>
+		      <%= f.hidden_field :item_id, :value => @item.id %>
+		      <%= f.submit "カートに入れる", class: "btn btn-primary" %>
+		    <% end %>
+		</div>
+	</div>
+</div>

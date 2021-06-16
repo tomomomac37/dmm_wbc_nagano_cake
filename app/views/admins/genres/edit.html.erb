@@ -1,0 +1,8 @@
+<div class="row">
+<h2 class="genre-edit-head">ジャンル編集</h2>
+<%= form_with model: @genre, url: admins_genre_path(@genre),html: {method: "patch"}, local: true do |genre| %>
+	<%= genre.text_field :name %>
+	<%= genre.submit '変更を保存する',class:"btn btn-success genre-submit" %>
+<%# ここまで %>
+<% end %>
+</div>

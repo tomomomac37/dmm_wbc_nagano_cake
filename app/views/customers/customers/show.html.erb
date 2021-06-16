@@ -1,0 +1,40 @@
+<div class="row">
+    <h3>登録情報<%= link_to "編集する", edit_customer_path, class: "btn btn-primary" %></h3>
+    
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">氏名</th>
+                <td style><%= @customer.first_name %>&ensp;<%= @customer.last_name %></td>
+              </tr>
+
+              <tr>
+                <th scope="col">フリガナ</th>
+                <td style><%= @customer.first_name_kana %>&ensp;<%= @customer.last_name_kana %></td>
+              </tr>
+
+              <tr>
+                <th scope="col">郵便番号</th>
+                <td style><%= @customer.postal_code %></td>
+              </tr>
+
+              <tr>
+                 <th scope="col">住所</th>
+                <td style><%= @customer.address %></td>
+              </tr>
+
+              <tr>
+                <th scope="col">電話番号</th>
+                <td style><%= @customer.telephone_number %></td>
+              </tr>
+
+              <tr>
+                <th scope="col">メールアドレス</th>
+                <td style><%= @customer.email %></td>
+              </tr>
+            </thead>
+  	    </table>
+    <h3>配送先<%= link_to "一覧を見る", new_address_path, class: "btn btn-primary" %></h3>
+    <h3>注文履歴<%= link_to "一覧を見る", orders_path, class: "btn btn-primary" %></h3>
+  	    
+</div>

@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <table class="table table-bordere">
+            <thead>
+                <tr>
+                    <th>会員ID</th>
+                    <th>氏名</th>
+                    <th>メールアドレス</th>
+                    <th>ステータス</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @customers.each do |customer| %>
+                    <tr>
+                        <td><%= customer.id %></td>
+                        <td style>
+						<u><%= link_to (customer.first_name + customer.last_name), admins_customer_path(customer.id), class: "u" %></u>
+					    </td>
+                        <td><%= customer.email %></td>
+                        <td><%= customer.is_active %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

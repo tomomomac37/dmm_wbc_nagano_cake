@@ -1,0 +1,44 @@
+<div class="container">
+    <h2><%= @customer.first_name %><%= @customer.last_name %>さんの会員情報編集</h2>
+    <div class="row">
+        <%= form_with model: @customer, url: admins_customer_path(@customer.id), method: :patch, local: true do |f| %>
+                        <%= f.label :会員ID %>
+                        <%= @customer.id %>
+                    <div class="field">
+                        <div class="form-group">
+                		    <%= f.label :氏名 %>
+                            <%= f.text_field :first_name, autofocus: true, autocomplete: "email" %>
+                            <%= f.text_field :last_name, autocomplete: "email" %>
+                    </div>
+                    <div class="field">
+                          <%= f.label :フリガナ %>
+                          <%= f.text_field :first_name_kana, autocomplete: "email" %>
+                          <%= f.text_field :last_name_kana, autocomplete: "email" %>
+                    </div>
+                    <div class="field">
+                          <%= f.label :郵便番号 %>
+                          <%= f.text_field :postal_code, autocomplete: "email" %>
+                    </div>
+                    <div class="field">
+                          <%= f.label :住所 %>
+                          <%= f.text_field :address, autocomplete: "email" %>
+                    </div>
+                    <div class="field">
+                          <%= f.label :電話番号 %>
+                          <%= f.text_field :telephone_number, autocomplete: "email" %>
+                    </div>
+                    <div class="field">
+                          <%= f.label :メールアドレス %>
+                          <%= f.text_field :email, autocomplete: "email" %>
+                    </div>
+                    <div class="field">
+                        <%= f.label :会員ステータス %>
+                    	<%= f.radio_button :is_active, true %>
+                    	<%= f.label :is_active, "有効" %>
+                        <%= f.radio_button :is_active, false %>
+                        <%= f.label :is_active, "退会" %>
+                    </div>
+                    <%= f.submit "変更を保存", class: "btn btn-primary" %>
+        <% end %>
+    </div>
+</div>

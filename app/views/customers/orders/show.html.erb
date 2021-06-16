@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row">
+          <div class="col-md-7">
+            <h3>注文履歴詳細</h3>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">注文日</th>
+                    <td style><%= @order.created_at %></td>
+                  </tr>
+    
+                  <tr>
+                    <th scope="col">配送先</th>
+                    <td style><%= @order.postal_code %>&ensp;<%= @order.address %></td>
+                  </tr>
+    
+                  <tr>
+                    <th scope="col">支払方法</th>
+                    <td style><%= @order.payment_method %></td>
+                  </tr>
+    
+                  <tr>
+                     <th scope="col">ステータス</th>
+                     <td style><%= @order.sales_order_status %></td>
+                  </tr>
+                </thead>
+      	    </table>
+          </div>
+          <div class="col-md-5">
+              <h3>請求情報</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">商品合計</th>
+                    <td style><%= @order.billing_amount - @order.freight %></td>
+                  </tr>
+    
+                  <tr>
+                    <th scope="col">配送料</th>
+                    <td style><%= @order.freight %></td>
+                  </tr>
+    
+                  <tr>
+                    <th scope="col">ご請求額</th>
+                    <td style><%= @order.billing_amount %></td>
+                  </tr>
+                </thead>
+      	    </table>
+          </div>
+    </div>
+    <div class="row">
+        <h3>注文内容</h3>
+            <table class="table table-bordere">
+                <thead>
+                    <tr>
+                        <th>商品</th>
+                        <th>単価（税込）</th>
+                        <th>個数</th>
+                        <th>小計</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @order_items.each do |order_item| %>
+                    <tr>
+                        <td><%= order_item.item.name %></td>
+                        <td><%= (order_item.item.price * 1.1).to_i %></td>
+                        <td><%= order_item.amount %></td>
+                        <td><%= (order_item.price * 1.1).to_i * order_item.amount %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

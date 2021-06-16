@@ -1,0 +1,50 @@
+<div class="row">
+    <h2>商品新規登録</h2>
+    <%= form_with model: @item, url: admins_items_path, method: :post, local: true do |f| %>
+<!--エラーメッセージ 表示-->
+    <% if @item.errors.any? %>
+    <h3><%= @item.errors.count %>error occurrence</h3>
+    <ul>
+        <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+    <% end %>
+<!--エラーメッセージ 表示-->
+        <div class="col-xs-5">
+        	<div class="field">
+        		<%= f.label :image %>
+                <%= f.attachment_field :image %>
+        	</div>
+        </div>
+        <div class="col-xs-7">
+            <div class="field">
+            	<%= f.label :商品名 %>
+            	<%= f.text_field :name, class: "form" %>
+            </div>
+            <div class="field">
+            	<%= f.label :商品説明 %>
+            	<%= f.text_area :introduction %>
+            </div>
+            <div class="field">
+            	<%= f.label :ジャンル %>
+            	<%= f.collection_select :genre_id, Genre.all, :id, :name, prompt: "何を選択しますか？" %>
+            </div>
+            <div class="field">
+            	<%= f.label :税抜価格 %>
+            	<%= f.text_field :price %>
+            	円
+            </div>
+            <div class="field">
+            	<%= f.radio_button :is_active, true %>
+            	<%= f.label :is_active, "販売中" %>
+                <%= f.radio_button :is_active, false %>
+                <%= f.label :is_active, "売切れ" %>
+            </div>
+            <div class="actions row">
+            <%= f.hidden_field :id, :value => @item.id %>
+    		<%= f.submit "新規登録",class:"btn btn-primary col-xs-12" %>
+            </div>
+        </div>
+    <% end %>
+</div>
