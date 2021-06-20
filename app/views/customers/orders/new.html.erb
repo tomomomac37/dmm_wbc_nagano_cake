@@ -29,7 +29,7 @@
                             <%= label_tag(:selected_address, "登録済住所から選択") %>
                             <p>
                             <!--ここの記述は正しいのか？-->
-                            <%= f.collection_select :address, @addresses, :id, :address %>
+                            <%= f.collection_select :address_for_order, @addresses, :id, :address %>
                             </p>
                         </div>
                         <%= radio_button_tag(:selected_address, :radio3) %>

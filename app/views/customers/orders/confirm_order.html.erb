@@ -43,8 +43,11 @@
       </div>
     </div>
 </div>
-<h3>支払方法<%= (@order.payment_method == 0) ? "クレジットカード" : "銀行振り込み" %></h3>
-<h3>お届け先<%= @order.address %></h3>
+<h2>支払方法</h2>
+<p><%= (@order.payment_method == 0) ? "クレジットカード" : "銀行振り込み" %></p>
+<h2>お届け先</h2>
+<p><%= @order.postal_code %>&emsp;<%= @order.address %></p>
+<p><%= @order.name %></p>
 <%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
 <!--create確認用-->
 <%= f.hidden_field :customer_id %>
