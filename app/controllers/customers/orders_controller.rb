@@ -48,6 +48,8 @@ class Customers::OrdersController < ApplicationController
       @order.postal_code = current_customer.postal_code
       @order.name = current_customer.last_name + current_customer.first_name
     elsif params[:selected_address] == "radio2"
+      # ここでエラーが出ます
+      # rails c でAddressのデータを確認したところ問題なく保存されていた。
       @order.address = Address.find(params[:order][:address_for_order])
     else
       @order.address = Order.new
