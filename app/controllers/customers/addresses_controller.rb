@@ -10,7 +10,7 @@ class Customers::AddressesController < ApplicationController
   end
 
   def create
-    @address = Address.new(address_params)
+    address = Address.new(address_params)
     address.customer_id = current_customer.id
     if address.save
       flash[:success] = '配送先を登録しました'
@@ -35,7 +35,7 @@ class Customers::AddressesController < ApplicationController
 
   def destroy
       @address = Address.find(params[:id])
-      address.destroy
+      @address.destroy
       flash[:success] = "削除しました"
       redirect_to new_address_path
   end
@@ -43,7 +43,7 @@ class Customers::AddressesController < ApplicationController
   private
   
   def address_params
-      params.require(:address).permit(:postal_code, :address, :name)
+      params.require(:address).permit(:postal_code, :address, :name, :id)
       
   end
 end

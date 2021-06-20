@@ -8,9 +8,9 @@
                     <th scope="row">支払方法</th>
                     <td>
                         <div class="radio">
-                            <%= f.radio_button :payment_method, 0 %>
+                            <%= f.radio_button :payment_method, "0" %>
                             <label class="payment-label">クレジットカード</label>
-                            <%= f.radio_button :payment_method, 1 %>
+                            <%= f.radio_button :payment_method, "1" %>
                             <label class="payment-label">銀行振込</label>     
                         </div>
                     </td>
@@ -28,7 +28,8 @@
                             <%= radio_button_tag(:selected_address, :radio2) %>
                             <%= label_tag(:selected_address, "登録済住所から選択") %>
                             <p>
-                            <%= collection_select(:regestrated_address, :regestrated_address, current_customer.addresses.all, :id, :full_address, prompt: "住所を選択してください" )%>
+                            <!--ここの記述がうまくいきません-->
+                            <%= f.collection_select :address, @addresses, :id, :address %>
                             </p>
                         </div>
                         <%= radio_button_tag(:selected_address, :radio3) %>

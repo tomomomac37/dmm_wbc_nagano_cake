@@ -43,7 +43,7 @@
       </div>
     </div>
 </div>
-<h3>支払方法<%= @order.payment_method %></h3>
+<h3>支払方法<%= (@order.payment_method == 0) ? "クレジットカード" : "銀行振り込み" %></h3>
 <h3>お届け先<%= @order.address %></h3>
 <%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
 <!--create確認用-->

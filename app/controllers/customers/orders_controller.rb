@@ -39,31 +39,19 @@ class Customers::OrdersController < ApplicationController
   def confirm_order
     @orders = current_customer.orders
     @cart_items = current_customer.cart_items
-    
     @sum = @cart_items.sum{|ci| ci.item.price * ci.amount}
     @order = Order.new(order_params)
-    @order.customer_id = current_customer.id
-    @order.payment_method = params[:order][:payment_method]
-    @order.freight = 800
-    
-    if params[:payment_method] == 0
-      @order.payment_method = "クレジットカード"
-    else
-      @order.payment_method = "銀行振り込み"
-    end
+    @address = Address.all
     
     if params[:selected_address] == "radio1"
       @order.address = current_customer.address
       @order.postal_code = current_customer.postal_code
       @order.name = current_customer.last_name + current_customer.first_name
     elsif params[:selected_address] == "radio2"
-      @address = Address.find(params[:order][:address])
-      @order.address = @address.address
-      @order.postal_code = @address.postal_code
-      @order.first_name = @address.first_name
-      @order.last_name = @address.last_name
+      @order.address = Address.find(params[:order][:address_for_order])
     else
-      @order = Order.new
+      @order.address = Order.new
+      @order.save
     end
     
   end
@@ -90,4 +78,8 @@ class Customers::OrdersController < ApplicationController
     params.require(:order_item).permit(:order_id, :item_id, :amount, :production_status, :price)
   end
   
+  def address_params
+      params.require(:address).permit(:postal_code, :address, :name, :id)
+      
+  end
 end
