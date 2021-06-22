@@ -7,6 +7,7 @@ class Customers::OrdersController < ApplicationController
     @orders = current_customer.cart_items
     @customer = Customer.find(current_customer.id)
     @addresses = @customer.addresses
+    @order.save
   end
   
   def show
@@ -49,9 +50,12 @@ class Customers::OrdersController < ApplicationController
       @order.name = current_customer.last_name + current_customer.first_name
     elsif params[:selected_address] == "radio2"
       @order.address = Address.find_by(params[:order][:address_for_order]).address
+      @order.postal_code = Address.find_by(params[:order][:address_for_order]).postal_code
+      @order.name = Address.find_by(params[:order][:address_for_order]).name
     else
-      @order.address = Order.new
-      # binding.pry
+      @order = Order.new(order_params)
+      @order.save
+      
     end
     
   end
